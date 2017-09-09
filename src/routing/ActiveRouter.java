@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import buffermanagement.BufferManagementPolicy;
 import routing.util.EnergyModel;
 import routing.util.MessageTransferAcceptPolicy;
 import routing.util.RoutingInfo;
@@ -48,6 +49,7 @@ public abstract class ActiveRouter extends MessageRouter {
 
 	private MessageTransferAcceptPolicy policy;
 	private EnergyModel energy;
+	private BufferManagementPolicy bufferManagementPolicy;
 
 	/**
 	 * Constructor. Creates a new message router based on the settings in
@@ -273,7 +275,8 @@ public abstract class ActiveRouter extends MessageRouter {
 		long freeBuffer = this.getFreeBufferSize();
 		/* delete messages from the buffer until there's enough space */
 		while (freeBuffer < size) {
-			Message m = getNextMessageToRemove(true); // don't remove msgs being sent
+			Message m = bufferManagementPolicy.getNextMessageToRemove(true,
+						new ArrayList<Message>(getMessageCollection()), this); // don't remove msgs being sent
 
 			if (m == null) {
 				return false; // couldn't remove any more messages
@@ -657,4 +660,11 @@ public abstract class ActiveRouter extends MessageRouter {
 		return top;
 	}
 
+	public BufferManagementPolicy getBufferManagementPolicy() {
+		return bufferManagementPolicy;
+	}
+
+	public void setBufferManagementPolicy(BufferManagementPolicy bufferManagementPolicy) {
+		this.bufferManagementPolicy = bufferManagementPolicy;
+	}
 }

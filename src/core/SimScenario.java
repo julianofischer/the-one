@@ -4,6 +4,7 @@
  */
 package core;
 
+import buffermanagement.BufferManagementPolicy;
 import input.EventQueue;
 import input.EventQueueHandler;
 
@@ -14,6 +15,7 @@ import java.util.List;
 import movement.MapBasedMovement;
 import movement.MovementModel;
 import movement.map.SimMap;
+import routing.ActiveRouter;
 import routing.MessageRouter;
 
 /**
@@ -70,11 +72,15 @@ public class SimScenario implements Serializable {
 	public static final String INTERFACENAME_S = "interface";
 	/** application name in the group -setting id ({@value})*/
 	public static final String GAPPNAME_S = "application";
+	/** buffer management policy */
+	public static final String BUFFMNG_S = "bufferManagement";
 
 	/** package where to look for movement models */
 	private static final String MM_PACKAGE = "movement.";
 	/** package where to look for router classes */
 	private static final String ROUTING_PACKAGE = "routing.";
+	/** package where to look for buffer management policies */
+	private static final String BUFFMNG_PACKAGE = "buffermanagement.";
 
 	/** package where to look for interface classes */
 	private static final String INTTYPE_PACKAGE = "interfaces.";
@@ -338,6 +344,13 @@ public class SimScenario implements Serializable {
 			MessageRouter mRouterProto =
 				(MessageRouter)s.createIntializedObject(ROUTING_PACKAGE +
 						s.getSetting(ROUTER_S));
+
+			/* initialize buffer management policy here */
+			BufferManagementPolicy bufferManagementPolicy =
+					(BufferManagementPolicy) s.createIntializedObject(BUFFMNG_PACKAGE + s.getSetting(BUFFMNG_S));
+			ActiveRouter activeRouter = (ActiveRouter) mRouterProto;
+			activeRouter.setBufferManagementPolicy(bufferManagementPolicy);
+
 
 			/* checks that these values are positive (throws Error if not) */
 			s.ensurePositiveValue(nrofHosts, NROF_HOSTS_S);
