@@ -1,0 +1,10 @@
+@julianofischer
+
+Significado do nome do diretório:
+62: 62 nós presentes no dataset
+61: 61 nós presentes no dataset
+...
+57: 5 nós foram removidos do dataset (5 últimos)
+
+Processo para aleatorizar e remover foi feito pelo script randomize_scenario.py
+
