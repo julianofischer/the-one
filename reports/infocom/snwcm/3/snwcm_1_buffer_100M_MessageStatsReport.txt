@@ -1,0 +1,20 @@
+Message stats for scenario snwcm_1_buffer_100M
+sim_time: 254150.0000
+created: 1000
+started: 8424
+relayed: 5608
+aborted: 2816
+dropped: 2016
+removed: 0
+delivered: 916
+delivery_prob: 0.9160
+response_prob: 0.0000
+overhead_ratio: 5.1223
+latency_avg: 35211.5687
+latency_med: 26737.2000
+hopcount_avg: 2.1026
+hopcount_med: 2
+buffertime_avg: 107969.6992
+buffertime_med: 96041.0000
+rtt_avg: NaN
+rtt_med: NaN
