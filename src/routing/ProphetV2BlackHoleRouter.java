@@ -10,14 +10,21 @@ public class ProphetV2BlackHoleRouter extends ProphetV2Router{
         super(s);
     }
 
-    protected ProphetV2BlackHoleRouter(ProphetV2Router r) {
+    protected ProphetV2BlackHoleRouter(ProphetV2BlackHoleRouter r) {
         super(r);
     }
 
     @Override
     public Message messageTransferred(String id, DTNHost from) {
+        System.out.println("A message was transferred from "+from.getAddress()+" to "+getHost().getAddress());
         Message m = super.messageTransferred(id, from);
-        this.deleteMessage(id, false);
+        this.deleteMessage(id, true);
         return m;
+    }
+
+    @Override
+    public MessageRouter replicate() {
+        ProphetV2BlackHoleRouter r = new ProphetV2BlackHoleRouter(this);
+        return r;
     }
 }

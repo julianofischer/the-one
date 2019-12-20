@@ -54,5 +54,11 @@ public class ProphetV2CMRouter extends ProphetV2Router {
         return null;
     }
 
+    @Override
+    public MessageRouter replicate() {
+        ProphetV2CMRouter r = new ProphetV2CMRouter(this);
+        return r;
+    }
+
 
 }

@@ -21,4 +21,10 @@ public class MaxPropBlackHoleRouter extends MaxPropRouter{
         return m;
     }
 
+    @Override
+    public MessageRouter replicate() {
+        MaxPropBlackHoleRouter r = new MaxPropBlackHoleRouter(this);
+        return r;
+    }
+
 }

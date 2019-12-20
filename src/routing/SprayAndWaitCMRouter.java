@@ -50,4 +50,10 @@ public class SprayAndWaitCMRouter<transferDone> extends SprayAndWaitRouter {
         hash.add(msgId, hostAddress);
     }
 
+    @Override
+    public SprayAndWaitRouter replicate() {
+        SprayAndWaitCMRouter r = new SprayAndWaitCMRouter(this);
+        return r;
+    }
+
 }

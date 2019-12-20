@@ -20,4 +20,10 @@ public class SprayAndWaitBlackHoleRouter extends SprayAndWaitRouter {
         this.deleteMessage(id, false);
         return m;
     }
+
+    @Override
+    public SprayAndWaitRouter replicate() {
+        SprayAndWaitBlackHoleRouter r = new SprayAndWaitBlackHoleRouter(this);
+        return r;
+    }
 }
